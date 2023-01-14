@@ -19,10 +19,15 @@ stats = ttk.Label(text=f"Wins: {wins} | Plays: {plays} | Fastest Win: {fastest_w
 
 # stats.pack(pady=20)
 
+
+def validate_entry(entry):
+    var = entry.get()
+    print(var + '1')
+
 def doSomething(event):
-
-
     print(event.char)
+
+
 
 class SudBlock:
     def __init__(self, start_row, start_column):
@@ -33,8 +38,10 @@ class SudBlock:
         entries = {}
         cur_row, cur_column = self.start_row, self.start_column
         for i in range(1, 10):
-            entry = tk.Entry(bg="white", width=2, justify='center', font=('Arial', 40))
-            entry.bind(i, doSomething)
+            txt_var = tk.StringVar()
+            entry = tk.Entry(validatecommand=validate_entry(txt_var), validate='key', bg="white", width=2,
+                             justify='center', textvariable=txt_var, font=('Arial', 40))
+            entry.bind("<Key>", doSomething)
             entries[(cur_row, cur_column)] = entry.grid(row=cur_row, column=cur_column)
             if i % 3 == 0:
                 cur_row += 1
@@ -44,6 +51,7 @@ class SudBlock:
         return entries
 
 SudBlock(1, 1).new_block()
+
 
 
 
