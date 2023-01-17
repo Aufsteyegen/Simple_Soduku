@@ -20,7 +20,7 @@ stats = ttk.Label(text=f"Wins: {wins} | Plays: {plays} | Fastest Win: {fastest_w
 # stats.pack(pady=20)
 
 def testVal(entry_val, action_type, idx):
-    if idx != '0':
+    if idx != '0' or len(entry_val) > 1:
         return False
     if action_type == '1':
         if not entry_val.isdigit() or int(entry_val) == 0:
@@ -60,26 +60,12 @@ class SudBlock:
                 cur_column += 1
         return entries
 
-SudBlock(1, 1).new_block(), SudBlock(1, 4).new_block()
-SudBlock(1, 7).new_block(), SudBlock(4, 1).new_block()
-SudBlock(4, 4).new_block(), SudBlock(4, 7).new_block()
-SudBlock(7, 1).new_block(), SudBlock(7, 4).new_block()
-SudBlock(7, 7).new_block()
-
-
-
-
-#adds widgets to window
-
-
-#events
-
-
-
-
-
+class FullGrid(SudBlock):
+    def __init__(self):
+        self.upper_width_span = ttk.Frame(window, relief='flat', height=4).grid(row=1, column=4, columnspan=1, rowspan=5, ipadx=3, ipady=30, sticky="ns")
+SudBlock(1, 1).new_block()
+ttk.Frame(window, relief='flat', height=4).grid(row=1, column=4, columnspan=1, rowspan=5, ipadx=3, ipady=30, sticky="ns")
 
 
 # runs tkinter event loop
 window.mainloop()
-
