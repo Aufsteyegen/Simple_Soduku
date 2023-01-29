@@ -11,12 +11,12 @@ def testVal(entry_val, action_type, idx):
 
 def sort_entries():
     """
-    Create dictionary to store all data from SudBlock entries,
-    sorted by row.
+    Create a dictionary to store data from SudBlock entries,
+    with keys sorted by row.
 
     Each entry's coordinate is stored as a tuple key,
-    mapping to a list of 1. the entry item, and 2. the Tkinter 'Entry'
-    instance.
+    mapping to a list of the entry item and its associated
+    Tkinter 'Entry' object.
 
     Parameters: nothing
 
@@ -79,8 +79,8 @@ def next_widget(event):
 
 class SudBlock:
     """
-    Creates one 9x9 Sudoku block, with Tkinter 'Entry' classes
-    as inputs. Only accepts int numbers 1-9.
+    Creates one 9x9 Sudoku block, with Tkinter 'Entry' objects
+    as inputs. Each 'Entry' only accepts int numbers 1-9.
     """
     def __init__(self, start_row, start_column):
         """
@@ -95,7 +95,7 @@ class SudBlock:
 
     def new_block(self):
         """
-        Create a new block, with event listeners bound to
+        Create a new 3x3 block with event listeners bound to
         each Tkinter 'Entry' instance.
 
         Parameters: nothing beyond self
@@ -112,7 +112,8 @@ class SudBlock:
             entry.bind("<s>", next_widget), entry.bind("<w>", next_widget),
             entry.bind("<Button-1>", next_widget)
             entry.message = (row_assign, col_assign)
-            entries[(row_assign, col_assign)] = [entry.grid(row=row_assign, column=col_assign), entry]
+
+            entries[(row_assign, col_assign)] = [entry.grid(row=row_assign, column=col_assign, sticky=""), entry]
             if i % 3 == 0 and row_assign == self.start_row + 2:
                 break
             if i % 3 == 0:
